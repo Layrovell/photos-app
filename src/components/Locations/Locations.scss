@@ -1,0 +1,41 @@
+.locations__table {
+  cursor: pointer;
+  margin: 0 auto;
+  background-color: #9a8c98;
+
+  width: 1000px;
+}
+
+.locations__select,
+.locations__input {
+  background-color: #9a8c98;
+  width: 140px;
+  height: 40px;
+  padding: 8px;
+  outline: none;
+  border: none;
+  cursor: context-menu;
+  transition: all ease-in-out 0.4s;
+}
+
+.locations__select:active,
+.locations__select:hover {
+  box-shadow: 2px 2px 20px #48c78e;
+  background-color: #a9a4a4;
+}
+
+.locations__input:active,
+.locations__input:hover {
+  box-shadow: 2px 2px 20px #48c78e;
+  background-color: #ffe8d6;
+}
+
+.locations__container {
+}
+
+.locations__form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 20px 0;
+}

@@ -1,0 +1,71 @@
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.char__list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+P {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 10px;
+}
+
+.card__name {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+figure {
+  margin: 0;
+}
+
+figure img {
+  width: 100%;
+  opacity: 0.8;
+}
+
+figure img:hover {
+  opacity: 1;
+  transition: all 0.3s linear;
+  box-shadow: 2px 2px 20px #48c78e;
+}
+
+.column {
+  box-sizing: border-box;
+  flex: 1 100%;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.card-style {
+  border-image-slice: 1;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  transition: all 0.25s linear;
+}
+.card-style:hover {
+  box-shadow: 2px 2px 20px #48c78e;
+}
+
+@media (min-width: 500px) {
+  .column {
+    flex: 0 0 calc(100%/2 - 40px);
+  }
+}
+
+@media (min-width: 900px) {
+  .column {
+    flex: 0 0 calc(100%/3 - 40px);
+  }
+}
+
+.select__box {
+  text-align: center;
+}
