@@ -17,7 +17,7 @@ export const Modal = ({setModalActive, children}) => {
               setModalActive(false);
             }}
             type="button"
-            className="button is-warning is-small"
+            className="waves-effect waves-light btn amber darken-4"
           >
             Close
           </button>

@@ -1,68 +1,60 @@
 @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;300;400;500;600;700;800;900&display=swap');
 
+.brand-logo {
+  font-family: 'Big Shoulders Display', sans-serif;
+}
+
 .App {
   background-color: #323031;
   min-height: 100vh;
   color: #fff;
 }
 
-.nav__list {
-  display: flex;
-  justify-content: center;
-  background-color: #48c78e;
-  //font-weight: bold;
-  //font-family: 'Shadows Into', cursive;
-  font-size: 16px;
-}
-
-.nav__item {
-  padding: 10px 20px;
-  text-transform: uppercase;
-  color: #2c3b5a;
-  transition: all ease-in-out 0.4s;
-}
-
-.nav__item:hover,
-.nav__item:active {
-  background-color: rgba(242, 241, 239, 0.4)
-  //text-shadow: 0 0 6px #6aff00;
-}
-
-.form {
-  width: 500px;
-}
-
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.www {
-  background: linear-gradient(90deg, #e63946, #14213d, #23a6d5, #606c38);
-  background-size: 200% 200%;
-  animation: gradient 10s ease infinite;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.section {
-  outline: 2px dashed lightpink;
-
   &__title {
     font-size: 18px;
     text-align: center;
     padding: 20px 0;
     color: #9a8c98;
   }
+
+  &__info {
+    color: #48c78e;
+    font-size: 1rem;
+
+    &:hover {
+      text-shadow: 2px 2px 20px #48c78e;
+    }
+  }
+}
+
+.py1 {
+  padding: 10px 0;
+}
+
+.py3 {
+  padding: 30px 0;
+}
+
+.box-shadow {
+  box-shadow: 2px 2px 20px #48c78e;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 20px #48c78e;
+}
+
+.select__box {
+  display: flex;
+  justify-content: left;
+  padding: 20px 0;
+}
+
+.ml {
+  margin: 10px 0;
+}
+
+.active {
+  background: rgba(46, 49, 49, 0.1);
 }

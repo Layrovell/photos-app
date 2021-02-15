@@ -1,26 +1,44 @@
 import React, {useEffect, useState} from 'react';
-import {getLocation} from '../../api/api';
-import './Locations.scss';
 import {Pagination} from "../Pagination/Pagination";
+import {makeOptions} from "../../Helpers/makeOptions";
+import {Select} from "../Select/Select";
 
 export const Locations = () => {
   const [locations, setLocations] = useState([]);
   const [locQuery, setLocQuery] = useState('');
 
-  useEffect(async () => {
-    try {
-      const locations = await getLocation();
+  const [totalPages, setTotalPages] = useState(0);
+  const [cardsAmount, setCardsAmount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
-      setLocations(locations);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const [prevPage, setPrevPage] = useState('');
+  const [nextPage, setNextPage] = useState('');
 
-  const onHandleQuery = (e) => {
-    setLocQuery(e.target.value);
-    console.log('query: ' + locQuery);
-  };
+  const [filteredOptions, setFilteredOptions] = useState({ dimension: '', type: '' });
+
+  useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/location/?page=${currentPage}`)
+      .then(res => res.json())
+      .then(loc => {
+        if (loc.info.next) {
+          setNextPage(loc.info.next)
+        } else {
+          setNextPage('')
+        }
+        if (loc.info.prev) {
+          setPrevPage(loc.info.prev)
+        } else {
+          setPrevPage('')
+        }
+
+        setTotalPages(loc.info.pages);
+        setLocations(loc.results);
+        setCardsAmount(loc.info?.count);
+      })
+      .catch(err => console.log(err))
+  }, [currentPage]);
+
+  const onHandleQuery = (e) => setLocQuery(e.target.value);
 
   const searchLocation = () => {
     const searchQuery = locQuery.toLocaleLowerCase().trim();
@@ -28,56 +46,81 @@ export const Locations = () => {
       .filter(l => l.name.toLocaleLowerCase().includes(searchQuery));
 
     return filteredLocations;
-  }
+  };
+
+  useEffect(() => {
+    const { dimension, type } = filteredOptions;
+    const dimensionQuery = dimension && dimension !== 'All' ? '&dimension=' + dimension : '';
+    const typeQuery = type && type !== 'All' ? '&type=' + type : '';
+
+    const result = fetch(`https://rickandmortyapi.com/api/location/?page=${dimensionQuery}${typeQuery}`)
+      .then((result) => {
+        return result.json();
+      })
+      .then((data) => {
+        setLocations(data.results);
+      });
+
+    console.log(result);
+  }, [filteredOptions]);
 
   console.log(locations);
 
+  const dimensionOptions = makeOptions(locations, 'dimension');
+  const typeOptions = makeOptions(locations, 'type');
+
+  useEffect(() => {
+    let temp = [...locations];
+    const options = Object.values(filteredOptions).filter(el => el !== 'All');
+
+    if (options.length) {
+      options.forEach(el => {
+        temp = temp.filter(t => t)
+      })
+    }
+
+  }, [filteredOptions])
+
   return (
-    <section className="locations">
-      <div className="locations__container">
-        <h1 className="section__title">Locs:</h1>
+    <div className="container">
+      <h2 className="py3 text-shadow">Locations:</h2>
+      <p className="container__info py1">Found locations: {cardsAmount || "0"}</p>
+      <p className="container__info py1">Found pages: {totalPages || "0"}</p>
 
-        <div className="locations__form">
-          <input
-            value={locQuery}
-            onChange={onHandleQuery}
-            className="locations__input"
-            type="text"
-            placeholder="name..."
-          />
+      <div className="py1">
+        <input
+          value={locQuery}
+          onChange={onHandleQuery}
+          className="locations__input"
+          type="text"
+          placeholder="name..."
+        />
+      </div>
 
-          <div className="mx-6">
-            <select className="locations__select">
-              <option value="all">all</option>
-              <option value="Planet">Planet</option>
-              <option value="Dream">Dream</option>
-              <option value="Space station">Space station</option>
-              <option value="Fantasy town">Fantasy town</option>
-              <option value="Resort">Resort</option>
-              <option value="TV">TV</option>
-              <option value="Microverse">Microverse</option>
-              <option value="Cluster">Cluster</option>
-            </select>
-          </div>
+      <div className="select__box">
+        <Select
+          callback={setFilteredOptions}
+          name='type'
+          arrayOptions={typeOptions}
+          classNames="char-select mr-2"
+        />
+        <Select
+          callback={setFilteredOptions}
+          name='dimension'
+          arrayOptions={dimensionOptions}
+          classNames="char-select mr-2"
+        />
+      </div>
 
-          <div className="">
-            <select className="locations__select">
-              <option value="all">all</option>
-              <option value="Cronenberg Dimension">Cronenberg Dimension</option>
-              <option value="unknown">unknown</option>
-              <option value="Replacement Dimension">Replacement Dimension</option>
-              <option value="Fantasy Dimension">Fantasy Dimension</option>
-              <option value="Dimension 5-126">Dimension 5-126</option>
-              <option value="Dimension C-137">Dimension C-137</option>
-              <option value="Post-Apocalyptic Dimension">Post-Apocalyptic Dimension</option>
-            </select>
-          </div>
-        </div>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+      />
 
-        {/*<Pagination />*/}
-
-        <table className="locations__table table is-striped is-narrow is-hoverable">
-          <thead>
+      {cardsAmount > 0 && (
+        <table className="highlight">
+          <thead className="green accent-3">
           <tr>
             <th>ID</th>
             <th>Name</th>
@@ -98,8 +141,7 @@ export const Locations = () => {
             </>
           ))}
         </table>
-
-      </div>
-    </section>
+      )}
+    </div>
   );
 };

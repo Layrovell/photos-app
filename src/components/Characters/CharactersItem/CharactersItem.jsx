@@ -8,16 +8,16 @@ export const CharactersItem = ({char}) => {
 
   return (
     <>
-      <div className="sss" onClick={() => {
+      <div title="click to show info" className="card-box" onClick={() => {
         setModalActive(true);
       }}>
         <div className="column card-style">
           <figure>
             <img src={char.image} alt="img"/>
           </figure>
-          <div className="card-text">
-            <p className="card__name">{char.name}</p>
-            <p>{char.species}</p>
+          <div>
+            <p className="card-box__name">{char.name}</p>
+            <p className="card-box__text">{char.species}</p>
           </div>
         </div>
       </div>
@@ -29,8 +29,9 @@ export const CharactersItem = ({char}) => {
           char={char}
         >
           <div className="intro">
+            <img className="intro__img" src={char.image} alt="char image"/>
             <div className="intro__content">
-              <p className="intro__timezone">{char.name}</p>
+              <p className="intro__name">{char.name}</p>
               <hr/>
               <p className="intro__title">
                 Gender:

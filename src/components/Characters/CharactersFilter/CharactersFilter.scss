@@ -5,10 +5,12 @@
   padding: 4px;
   outline: none;
   transition: all ease-in-out 0.2s;
+  display: block;
 }
 
 .char-select:active,
 .char-select:hover {
   box-shadow: 2px 2px 20px #48c78e;
   background-color: #ffe8d6;
+  display: block;
 }

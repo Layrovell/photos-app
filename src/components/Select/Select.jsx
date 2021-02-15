@@ -12,14 +12,16 @@ export const Select = (props) => {
   };
 
   return (
-    <select
-      onChange={handleFilter}
-      name={props.name}
-      className={props.classNames}
-    >
-      {props.arrayOptions.map(op => (
-        <option key={op} value={op}>{op}</option>
-      ))}
-    </select>
+    <>
+      <select
+        onChange={handleFilter}
+        name={props.name}
+        className={props.classNames}
+      >
+        {props.arrayOptions.map(op => (
+          <option key={op} value={op}>{op}</option>
+        ))}
+      </select>
+    </>
   )
 }

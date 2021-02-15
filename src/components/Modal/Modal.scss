@@ -20,13 +20,20 @@ hr {
   padding: 20px;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.6);
-  width: 320px;
+  width: 420px;
 }
 
 .intro {
   display: flex;
   flex-direction: column;
   cursor: pointer;
+
+  &__img {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+  }
 
   &__title {
     display: flex;
@@ -35,12 +42,16 @@ hr {
   }
 
   &__content {
-    font-size: 16px;
+    font-size: 18px;
     padding: 10px 0;
   }
 
-  &__timezone {
+  &__name {
     text-align: center;
     font-size: 22px;
+  }
+
+  &__title {
+    font-size: 16px;
   }
 }
