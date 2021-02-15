@@ -23,7 +23,7 @@ function App() {
         </nav>
 
         <Switch>
-          <Route exact path="/react_app" render={() => {
+          <Route exact path="/rm-app" render={() => {
               return <Redirect to="/characters"/>
             }}
           />
