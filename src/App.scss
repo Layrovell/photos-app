@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;300;400;500;600;700;800;900&display=swap');
+
+.brand-logo {
+  font-family: 'Big Shoulders Display', sans-serif;
+}
+
+.App {
+  background-color: #323031;
+  min-height: 100vh;
+  color: #fff;
+}
+
+.container {
+  &__title {
+    font-size: 18px;
+    text-align: center;
+    padding: 20px 0;
+    color: #9a8c98;
+  }
+
+  &__info {
+    color: #48c78e;
+    font-size: 1rem;
+
+    &:hover {
+      text-shadow: 2px 2px 20px #48c78e;
+    }
+  }
+}
+
+.py1 {
+  padding: 10px 0;
+}
+
+.py3 {
+  padding: 30px 0;
+}
+
+.box-shadow {
+  box-shadow: 2px 2px 20px #48c78e;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 20px #48c78e;
+}
+
+.select__box {
+  display: flex;
+  justify-content: left;
+  padding: 20px 0;
+}
+
+.ml {
+  margin: 10px 0;
+}
+
+.active {
+  background: rgba(46, 49, 49, 0.1);
+}
